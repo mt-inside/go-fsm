@@ -21,28 +21,22 @@ func main() {
 
 	testEvents := []event{push, coin, push, push, coin, push, coin, coin, coin, push, push}
 	for _, e := range testEvents {
-		s = dispatch(s, e)
-	}
-}
-
-func dispatch(s state, e event) state {
-	if s == locked {
-		if e == push {
-			sideEffect("ouch")
-		} else if e == coin {
-			sideEffect("green light")
-			s = unlocked
-		}
-	} else if s == unlocked {
-		if e == push {
-			sideEffect("click")
-			s = locked
-		} else if e == coin {
-			sideEffect("cha-ching")
+		if s == locked {
+			if e == push {
+				sideEffect("ouch")
+			} else if e == coin {
+				sideEffect("green light")
+				s = unlocked
+			}
+		} else if s == unlocked {
+			if e == push {
+				sideEffect("click")
+				s = locked
+			} else if e == coin {
+				sideEffect("cha-ching")
+			}
 		}
 	}
-
-	return s
 }
 
 func sideEffect(s string) {
