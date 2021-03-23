@@ -12,6 +12,9 @@ const (
 type stateFn func(event) stateFn
 
 func main() {
+	/* This example is called "1-D".
+	 * We actually store the "state" as a pointer straight to the function that implements it.
+	 * But we could have a state enum and a slice of the funcions (see 2-D) */
 	s := stateLocked
 
 	testEvents := []event{push, coin, push, push, coin, push, coin, coin, coin, push, push}

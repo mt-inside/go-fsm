@@ -33,6 +33,11 @@ type turnstyle struct {
 
 	state   state
 	machine [][]stateFn
+	/* Another way to do this would be
+	* - an interface specifying handler functions for each event
+	* - each "row", ie each state, isn't a slice of functions, but rather an object, providing all the functions for that particular state
+	* - see https://golangbyexample.com/state-design-pattern-go/
+	 */
 }
 
 func newTurnstyle() *turnstyle {
