@@ -9,7 +9,7 @@ const (
 	coin event = iota
 )
 
-type state func(event) state
+type stateFn func(event) stateFn
 
 func main() {
 	s := stateLocked
@@ -20,7 +20,7 @@ func main() {
 	}
 }
 
-func dispatch(s state, e event) state {
+func dispatch(s stateFn, e event) stateFn {
 	next := s(e)
 	if next == nil {
 		return s
@@ -28,7 +28,7 @@ func dispatch(s state, e event) state {
 	return next
 }
 
-func stateLocked(e event) state {
+func stateLocked(e event) stateFn {
 	switch e {
 	case push:
 		sideEffect("ouch")
@@ -39,7 +39,7 @@ func stateLocked(e event) state {
 	}
 	panic("unknown event")
 }
-func stateUnlocked(e event) state {
+func stateUnlocked(e event) stateFn {
 	switch e {
 	case push:
 		sideEffect("click")
